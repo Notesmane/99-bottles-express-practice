@@ -12,36 +12,36 @@ const PORT = 3000;
 
 // route
 app.get('/', (req, res) => {
-    const num = 99;
+    const numBottles = 99;
         // res.send('working');
     res.send(`
-    <h1>${num} Bottles of beer on the wall, ${num} bottles of beer!</h1>
-    <a href='/${num - 1}'a>Take one down, pass it around</a>`);
+    <h1>${numBottles} Bottles of beer on the wall, ${numBottles} bottles of beer!</h1>
+    <a href='/${numBottles -1}'a>Take one down, pass it around</a>`);
 });
 
-app.get('/:number_of_bottles', (req, res) => {
-    const {number_of_bottles} = req.params
-    const bottleDown = number_of_bottles - 1;
-    res.send(`
-    <h1>${number_of_bottles} Bottles of beer on the wall...</h1>
-    <h1>${number_of_bottles} Bottles of beer on the wall, ${number_of_bottles} of beer!</h1>
-    <a href='/:${bottleDown}'a>Take one down, pass it around</a>`)
-});
+app.get('/:number', (req, res) => {
+    // const {number_of_bottles} = req.params
+    const numBottles = Number(req.params.number);
+//     res.send(`
+//     <h1>${bottleDown - 1} Bottles of beer on the wall...</h1>
+//     <h1>${bottleDown - 1} Bottles of beer on the wall, ${bottleDown -1} of beer!</h1>
+//     <a href='/:${bottleDown -1}'a>Take one down, pass it around</a>`)
+// });
 
+// app.get(':/bottleDown', (req, res) => {
+    let link;
 
-app.get(':/bottleDown', (req, res) => {
-    if(bottleDown > 0) {
-        res.send(`
-        <h1>${bottleDown} Bottles of beer on the wall</h1>
-        <a href=''a>Take one down, pass it around</a>
-        `);
+    if(numBottles > 0) {
+        (link = `<a href='./${numBottles -1}'>Take one down and pass it around!</a>`)
     } else {
+        (link = `<a href='./'> No more bottles left. Start from beginning?</a>`)
+    }; 
         res.send(`
-        <h1>No more bottles left. :(</h1>
+        <h1>${numBottles} bottles of beer on the wall, ${numBottles} bottles of beer!</h1>
+        ${link}
         `);
     }
-});
-
+);
 
 // app.get('/data', (req, res) => {
 //     res.status(data);
